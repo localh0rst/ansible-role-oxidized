@@ -1,0 +1,17 @@
+#SPDX-License-Identifier: MIT-0
+---
+- name: Install required packages
+  ansible.builtin.apt:
+    name: "{{ oxidized_required_packages }}"
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Install Oxidized gem
+  community.general.gem:
+    name: oxidized
+    state: present
+    user_install: no
+  become: true
+
+
