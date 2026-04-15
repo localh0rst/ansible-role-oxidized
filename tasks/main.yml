@@ -54,7 +54,7 @@
     state: touch
     owner: "{{ oxidized_user }}"
     group: "{{ oxidized_group }}"
-    mode: '0650'
+    mode: '0640'
 
 - name: Create systemd service file for Oxidized
   ansible.builtin.template:
