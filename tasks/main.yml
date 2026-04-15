@@ -1,5 +1,13 @@
 #SPDX-License-Identifier: MIT-0
 ---
+- name: Create oxidized system user
+  ansible.builtin.user:
+    name: "{{ oxidized_user }}"
+    group: "{{ oxidized_group }}"
+    create_home: yes
+    shell: /bin/bash
+  become: true
+
 - name: Install required packages
   ansible.builtin.apt:
     name: "{{ oxidized_required_packages }}"
@@ -14,4 +22,18 @@
     user_install: no
   become: true
 
+- name: Install Oxidized web
+  community.general.gem:
+    name: oxidized-web
+    state: present
+    user_install: no
+  become: true
+  when: oxidized_install_web
 
+- name: Install Oxidized script
+  community.general.gem:
+    name: oxidized-script
+    state: present
+    user_install: no
+  become: true
+  when: oxidized_install_script
