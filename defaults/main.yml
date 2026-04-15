@@ -6,6 +6,11 @@ oxidized_home: "/home/oxidized"
 
 oxidized_listen_port: 8888
 oxidized_listen_ip: 127.0.0.1
+oxidized_url_prefix: ""
+oxidized_vhosts: 
+  - "{{ oxidized_listen_ip }}"
+  - "{{ ansible_fqdn }}"
+  - localhost
 
 oxidized_required_packages:
   - ruby 
@@ -38,7 +43,7 @@ oxidized_config:
   timeout: 20
   timelimit: 300
   retries: 3
-  prompt: !ruby/regexp /^([\w.@-]+[#>]\s?)$/
+  prompt: '!ruby/regexp /^([\w.@-]+[#>]\s?)$/'
   next_adds_job: false
   vars: {}
   groups: {}
@@ -47,7 +52,10 @@ oxidized_config:
   pid: "{{ oxidized_home }}/.config/oxidized/pid"
   extensions:
     oxidized-web:
-      load: false
+      load: "{{ oxidized_install_web }}"
+      listen: "{{ oxidized_listen_ip }}"
+      port: "{{ oxidized_listen_port }}"
+      url_prefix: "{{ oxidized_url_prefix }}"
   crash:
     directory: "{{oxidized_home}}/.config/oxidized/crashes"
     hostnames: false
