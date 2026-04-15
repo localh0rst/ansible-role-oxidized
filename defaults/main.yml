@@ -84,5 +84,5 @@ oxidized_config: {}
 # Merge default config with user config
 # User config will override default config
 # Only use defaults if oxidized_use_defaults is true
-_oxidized_config: "{{ (oxidized_config_defaults if oxidized_use_defaults else {}) | combine(oxidized_user_config) }}"
+_oxidized_config: "{{ (oxidized_config_defaults if oxidized_use_defaults else {}) | combine(oxidized_config) }}"
 
