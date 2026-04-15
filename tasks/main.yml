@@ -4,6 +4,7 @@
   ansible.builtin.user:
     name: "{{ oxidized_user }}"
     create_home: yes
+    home: "{{ oxidized_home }}"
     system: yes
   become: true
 
@@ -37,4 +38,22 @@
   become: true
   when: oxidized_install_script
 
+- name: Create config file for Oxidized
+  ansible.builtin.template:
+    src: config.j2
+    dest: "{{ oxidized_home }}/.config/oxidized/config"
+    owner: "{{ oxidized_user }}"
+    group: "{{ oxidized_group }}"
+    mode: '0600'
+  become_user: "{{ oxidized_user }}"
 
+- name: Create systemd service file for Oxidized
+  ansible.builtin.template:
+    src: oxidized.service.j2
+    dest: /etc/systemd/system/oxidized.service
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+  notify: 
+    - enable oxidized service

@@ -2,6 +2,7 @@
 ---
 oxidized_user: "oxidized"
 oxidized_group: "oxidized"
+oxidized_home: "/home/oxidized"
 
 oxidized_listen_port: 8888
 oxidized_listen_ip: 127.0.0.1
@@ -23,4 +24,47 @@ oxidized_required_packages:
 oxidized_install_web: false
 oxidized_install_script: false
 
-
+# Default Oxidized config. Created by running oxidized once
+oxidized_config:
+  username: username
+  password: password
+  model: junos
+  resolve_dns: true
+  interval: 3600
+  debug: false
+  run_once: false
+  threads: 30
+  use_max_threads: false
+  timeout: 20
+  timelimit: 300
+  retries: 3
+  prompt: !ruby/regexp /^([\w.@-]+[#>]\s?)$/
+  next_adds_job: false
+  vars: {}
+  groups: {}
+  group_map: {}
+  models: {}
+  pid: "{{ oxidized_home }}/.config/oxidized/pid"
+  extensions:
+    oxidized-web:
+      load: false
+  crash:
+    directory: "{{oxidized_home}}/.config/oxidized/crashes"
+    hostnames: false
+  stats:
+    history_size: 10
+  input:
+    default: ssh, telnet
+    debug: false
+    ssh:
+      secure: false
+    ftp:
+      passive: true
+    utf8_encoded: true
+  output:
+    default: file
+  source:
+    default: csv
+  model_map:
+    juniper: junos
+    cisco: ios 
