@@ -30,7 +30,14 @@ oxidized_install_web: false
 oxidized_install_script: false
 
 # Default Oxidized config. Created by running oxidized once
-oxidized_config:
+oxidized_use_defaults: true
+oxidized_config_defaults:
+  pid: "{{ oxidized_home }}/.config/oxidized/pid"
+  crash:
+    directory: "{{oxidized_home}}/.config/oxidized/crashes"
+    hostnames: false
+  stats:
+    history_size: 10
   username: username
   password: password
   model: junos
@@ -49,18 +56,13 @@ oxidized_config:
   groups: {}
   group_map: {}
   models: {}
-  pid: "{{ oxidized_home }}/.config/oxidized/pid"
   extensions:
     oxidized-web:
       load: "{{ oxidized_install_web }}"
       listen: "{{ oxidized_listen_ip }}"
       port: "{{ oxidized_listen_port }}"
       url_prefix: "{{ oxidized_url_prefix }}"
-  crash:
-    directory: "{{oxidized_home}}/.config/oxidized/crashes"
-    hostnames: false
-  stats:
-    history_size: 10
+      vhost: "{{ oxidized_vhosts }}"
   input:
     default: ssh, telnet
     debug: false
@@ -76,3 +78,11 @@ oxidized_config:
   model_map:
     juniper: junos
     cisco: ios 
+
+oxidized_config: {}
+
+# Merge default config with user config
+# User config will override default config
+# Only use defaults if oxidized_use_defaults is true
+_oxidized_config: "{{ (oxidized_config_defaults if oxidized_use_defaults else {}) | combine(oxidized_user_config) }}"
+

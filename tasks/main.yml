@@ -47,6 +47,15 @@
     mode: '0600'
   become_user: "{{ oxidized_user }}"
 
+# Create empty csv file for default csv file
+- name: Create empty router.db
+  ansible.builtin.file:
+    path: "{{ oxidized_home }}/.config/oxidized/router.db"
+    state: touch
+    owner: "{{ oxidized_user }}"
+    group: "{{ oxidized_group }}"
+    mode: '0650'
+
 - name: Create systemd service file for Oxidized
   ansible.builtin.template:
     src: oxidized.service.j2
