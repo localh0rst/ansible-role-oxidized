@@ -3,9 +3,8 @@
 - name: Create oxidized system user
   ansible.builtin.user:
     name: "{{ oxidized_user }}"
-    group: "{{ oxidized_group }}"
     create_home: yes
-    shell: /bin/bash
+    system: yes
   become: true
 
 - name: Install required packages
