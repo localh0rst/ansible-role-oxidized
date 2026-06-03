@@ -13,17 +13,17 @@ oxidized_vhosts:
   - localhost
 
 oxidized_required_packages:
-  - ruby 
-  - ruby-dev 
-  - libsqlite3-dev 
-  - libssl-dev 
-  - pkg-config 
-  - cmake 
-  - libssh2-1-dev 
-  - libicu-dev 
-  - zlib1g-dev 
-  - g++ 
-  - libyaml-dev 
+  - ruby
+  - ruby-dev
+  - libsqlite3-dev
+  - libssl-dev
+  - pkg-config
+  - cmake
+  - libssh2-1-dev
+  - libicu-dev
+  - zlib1g-dev
+  - g++
+  - libyaml-dev
   - libzstd-dev
 
 oxidized_install_web: false
