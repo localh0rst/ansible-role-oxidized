@@ -7,7 +7,7 @@ Wants=network-online.target
 ExecStart=/usr/local/bin/oxidized
 User={{ oxidized_user }}
 KillSignal=SIGKILL
-#Environment="OXIDIZED_HOME=/etc/oxidized"
+Environment="OXIDIZED_HOME={{ oxidized_home }}"
 Restart=on-failure
 RestartSec=300s
 
