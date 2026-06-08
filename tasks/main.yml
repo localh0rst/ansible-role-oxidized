@@ -8,6 +8,14 @@
     system: yes
   become: true
 
+- name: Create required directories
+  ansible.builtin.file:
+    path: "{{ oxidized_app_directory }}"
+    state: directory
+    mode: '0750'
+    user: "{{ oxidized_user }}"
+    group: "{{ oxidized_group }}"
+
 - name: Install required packages
   ansible.builtin.apt:
     name: "{{ oxidized_required_packages }}"
@@ -41,7 +49,7 @@
 - name: Create config file for Oxidized
   ansible.builtin.template:
     src: config.j2
-    dest: "{{ oxidized_home }}/.config/oxidized/config"
+    dest: "{{ oxidized_app_directory }}/config"
     owner: "{{ oxidized_user }}"
     group: "{{ oxidized_group }}"
     mode: '0600'
@@ -50,7 +58,7 @@
 # Create empty csv file for default csv file
 - name: Create empty router.db
   ansible.builtin.file:
-    path: "{{ oxidized_home }}/.config/oxidized/router.db"
+    path: "{{ oxidized_app_directory }}/router.db"
     state: touch
     owner: "{{ oxidized_user }}"
     group: "{{ oxidized_group }}"
