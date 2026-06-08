@@ -2,7 +2,8 @@
 ---
 oxidized_user: "oxidized"
 oxidized_group: "oxidized"
-oxidized_home: "/home/oxidized"
+oxidized_home: "/opt/oxidized"
+oxidized_app_directory: "{{ oxidized_home }}/oxidized"
 
 oxidized_listen_port: 8888
 oxidized_listen_ip: 127.0.0.1
@@ -33,9 +34,9 @@ oxidized_install_script: false
 # Default Oxidized config. Created by running oxidized once
 oxidized_use_defaults: true
 oxidized_config_defaults:
-  pid: "{{ oxidized_home }}/.config/oxidized/pid"
+  pid: "{{ oxidized_app_directory }}/pid"
   crash:
-    directory: "{{oxidized_home}}/.config/oxidized/crashes"
+    directory: "{{oxidized_app_directory}}/crashes"
     hostnames: false
   stats:
     history_size: 10
