@@ -25,6 +25,7 @@ oxidized_required_packages:
   - g++
   - libyaml-dev
   - libzstd-dev
+  - git
 
 oxidized_install_web: false
 oxidized_install_script: false
