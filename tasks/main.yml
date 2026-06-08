@@ -13,7 +13,7 @@
     path: "{{ oxidized_app_directory }}"
     state: directory
     mode: '0750'
-    user: "{{ oxidized_user }}"
+    owner: "{{ oxidized_user }}"
     group: "{{ oxidized_group }}"
 
 - name: Install required packages
